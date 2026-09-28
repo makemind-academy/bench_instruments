@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifest": {
+    "id": "com.makemind.sample.bench_instruments",
+    "name": "Bench",
+    "version": "1.0.0",
+    "schemaVersion": "1.0.0",
+    "type": "application",
+    "entryPoint": "ui.app",
+    "description": "Three instruments on one screen.",
+    "provider": "MakeMind",
+    "license": "MIT",
+    "category": "business",
+    "tags": ["scpi", "instrument", "sample"],
+    "publisher": { "name": "makemind.dev", "email": "dev@makemind.dev" }
+  }
+}

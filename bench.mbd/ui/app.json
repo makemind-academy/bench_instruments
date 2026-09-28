@@ -1,0 +1,72 @@
+{
+  "type": "application",
+  "title": "Bench",
+  "version": "1.0.0",
+  "initialRoute": "/",
+  "routes": {
+    "/": "ui://pages/bench"
+  },
+  "theme": {
+    "mode": "dark",
+    "color": {
+      "primary": "#059669",
+      "onPrimary": "#ffffff",
+      "primaryContainer": "#d5f2e6",
+      "onPrimaryContainer": "#04352a",
+      "surface": "#151b20",
+      "onSurface": "#e8f0f2",
+      "surfaceContainerHighest": "#0c1114",
+      "onSurfaceVariant": "#8b9aa0",
+      "outline": "#222c31",
+      "outlineVariant": "#222c31",
+      "error": "#b3261e",
+      "onError": "#ffffff",
+      "warning": "#e0a33c",
+      "onWarning": "#ffffff",
+      "inverseSurface": "#e8f0f2",
+      "inverseOnSurface": "#151b20"
+    },
+    "spacing": {
+      "xxs": 2,
+      "xs": 4,
+      "sm": 8,
+      "md": 16,
+      "lg": 24,
+      "xl": 32,
+      "2xl": 48
+    },
+    "shape": {
+      "none": 0,
+      "extraSmall": 4,
+      "small": 8,
+      "medium": 12,
+      "large": 16,
+      "extraLarge": 28,
+      "full": 999
+    },
+    "fonts": {
+      "JetBrainsMono": {
+        "source": "asset",
+        "family": "JetBrainsMono"
+      }
+    }
+  },
+  "state": {
+    "initial": {
+      "volts": "",
+      "amps": "",
+      "celsius": "",
+      "watts": "",
+      "over": false,
+      "limitNote": "",
+      "raw": "",
+      "benchRule": "",
+      "notice": ""
+    }
+  },
+  "onInit": {
+    "type": "tool",
+    "tool": "bench.read",
+    "params": {}
+  }
+}

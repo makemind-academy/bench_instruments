@@ -1,0 +1,660 @@
+{
+  "type": "page",
+  "metadata": {
+    "title": "Bench"
+  },
+  "onInit": {
+    "type": "tool",
+    "tool": "bench.read",
+    "params": {}
+  },
+  "state": {
+    "initial": {
+      "volts": "",
+      "amps": "",
+      "celsius": "",
+      "watts": "",
+      "over": false,
+      "limitNote": "",
+      "raw": "",
+      "benchRule": "",
+      "notice": ""
+    }
+  },
+  "content": {
+    "type": "container",
+    "decoration": {
+      "color": "{{theme.color.surfaceContainerHighest}}"
+    },
+    "child": {
+      "type": "linear",
+      "direction": "vertical",
+      "children": [
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 20,
+            "bottom": 16
+          },
+          "decoration": {
+            "color": "{{theme.color.surface}}",
+            "border": {
+              "bottom": true,
+              "color": "{{theme.color.outline}}",
+              "width": 1
+            }
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "linear",
+                "direction": "vertical",
+                "children": [
+                  {
+                    "type": "text",
+                    "content": "BENCH 2 · PSU · DMM · PROBE",
+                    "style": {
+                      "fontSize": 12,
+                      "color": "{{theme.color.onSurfaceVariant}}",
+                      "letterSpacing": 1.8
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "content": "Live sweep",
+                    "style": {
+                      "fontSize": 21,
+                      "color": "{{theme.color.onSurface}}",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ],
+                "gap": 4
+              },
+              {
+                "type": "spacer"
+              },
+              {
+                "type": "linear",
+                "direction": "vertical",
+                "children": [
+                  {
+                    "type": "text",
+                    "content": "BENCH LIMIT",
+                    "style": {
+                      "fontSize": 11,
+                      "color": "{{theme.color.onSurfaceVariant}}",
+                      "letterSpacing": 1.6
+                    }
+                  },
+                  {
+                    "type": "text",
+                    "content": "{{limitNote}}",
+                    "style": {
+                      "fontSize": 13,
+                      "color": "{{theme.color.warning}}",
+                      "fontFamily": "JetBrainsMono"
+                    }
+                  }
+                ],
+                "gap": 4,
+                "crossAxisAlignment": "end"
+              }
+            ]
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 24,
+            "right": 24,
+            "top": 10,
+            "bottom": 4
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "button",
+                "label": "Read again",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "bench.read",
+                  "params": {}
+                }
+              },
+              {
+                "type": "box",
+                "width": 10
+              },
+              {
+                "type": "button",
+                "label": "Set 9 V",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "psu.set",
+                  "params": {
+                    "volts": 9
+                  }
+                }
+              },
+              {
+                "type": "box",
+                "width": 10
+              },
+              {
+                "type": "button",
+                "label": "Set 30 V",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "psu.set",
+                  "params": {
+                    "volts": 30
+                  }
+                }
+              },
+              {
+                "type": "box",
+                "width": 10
+              },
+              {
+                "type": "button",
+                "label": "Output on",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "psu.output",
+                  "params": {
+                    "on": true
+                  }
+                }
+              },
+              {
+                "type": "box",
+                "width": 10
+              },
+              {
+                "type": "button",
+                "label": "Output off",
+                "variant": "outlined",
+                "onTap": {
+                  "type": "tool",
+                  "tool": "psu.output",
+                  "params": {
+                    "on": false
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 16,
+            "bottom": 8
+          },
+          "child": {
+            "type": "box",
+            "height": 150,
+            "child": {
+              "type": "linear",
+              "direction": "horizontal",
+              "crossAxisAlignment": "stretch",
+              "children": [
+                {
+                  "type": "expanded",
+                  "child": {
+                    "type": "container",
+                    "padding": {
+                      "all": 18
+                    },
+                    "decoration": {
+                      "color": "{{theme.color.surface}}",
+                      "borderRadius": 14,
+                      "border": {
+                        "color": "{{theme.color.outline}}",
+                        "width": 1
+                      }
+                    },
+                    "child": {
+                      "type": "linear",
+                      "direction": "vertical",
+                      "children": [
+                        {
+                          "type": "text",
+                          "content": "VOLTS",
+                          "style": {
+                            "fontSize": 11,
+                            "color": "{{theme.color.onSurfaceVariant}}",
+                            "letterSpacing": 1.6
+                          }
+                        },
+                        {
+                          "type": "linear",
+                          "direction": "horizontal",
+                          "crossAxisAlignment": "end",
+                          "children": [
+                            {
+                              "type": "text",
+                              "content": "{{volts}}",
+                              "style": {
+                                "fontSize": 44,
+                                "color": "{{theme.color.onSurface}}",
+                                "fontWeight": "bold",
+                                "fontFamily": "JetBrainsMono"
+                              }
+                            },
+                            {
+                              "type": "container",
+                              "padding": {
+                                "left": 8,
+                                "right": 0,
+                                "top": 0,
+                                "bottom": 0
+                              },
+                              "child": {
+                                "type": "text",
+                                "content": "V",
+                                "style": {
+                                  "fontSize": 14,
+                                  "color": "{{theme.color.onSurfaceVariant}}"
+                                }
+                              }
+                            }
+                          ],
+                          "mainAxisAlignment": "end"
+                        }
+                      ],
+                      "gap": 6
+                    }
+                  }
+                },
+                {
+                  "type": "expanded",
+                  "child": {
+                    "type": "container",
+                    "padding": {
+                      "left": 12,
+                      "right": 0,
+                      "top": 0,
+                      "bottom": 0
+                    },
+                    "child": {
+                      "type": "container",
+                      "padding": {
+                        "all": 18
+                      },
+                      "decoration": {
+                        "color": "{{theme.color.surface}}",
+                        "borderRadius": 14,
+                        "border": {
+                          "color": "{{theme.color.outline}}",
+                          "width": 1
+                        }
+                      },
+                      "child": {
+                        "type": "linear",
+                        "direction": "vertical",
+                        "children": [
+                          {
+                            "type": "text",
+                            "content": "AMPS",
+                            "style": {
+                              "fontSize": 11,
+                              "color": "{{theme.color.onSurfaceVariant}}",
+                              "letterSpacing": 1.6
+                            }
+                          },
+                          {
+                            "type": "linear",
+                            "direction": "horizontal",
+                            "crossAxisAlignment": "end",
+                            "children": [
+                              {
+                                "type": "text",
+                                "content": "{{amps}}",
+                                "style": {
+                                  "fontSize": 44,
+                                  "color": "{{theme.color.onSurface}}",
+                                  "fontWeight": "bold",
+                                  "fontFamily": "JetBrainsMono"
+                                }
+                              },
+                              {
+                                "type": "container",
+                                "padding": {
+                                  "left": 8,
+                                  "right": 0,
+                                  "top": 0,
+                                  "bottom": 0
+                                },
+                                "child": {
+                                  "type": "text",
+                                  "content": "A",
+                                  "style": {
+                                    "fontSize": 14,
+                                    "color": "{{theme.color.onSurfaceVariant}}"
+                                  }
+                                }
+                              }
+                            ],
+                            "mainAxisAlignment": "end"
+                          }
+                        ],
+                        "gap": 6
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "expanded",
+                  "child": {
+                    "type": "container",
+                    "padding": {
+                      "left": 12,
+                      "right": 0,
+                      "top": 0,
+                      "bottom": 0
+                    },
+                    "child": {
+                      "type": "container",
+                      "padding": {
+                        "all": 18
+                      },
+                      "decoration": {
+                        "color": "{{theme.color.surface}}",
+                        "borderRadius": 14,
+                        "border": {
+                          "color": "{{theme.color.outline}}",
+                          "width": 1
+                        }
+                      },
+                      "child": {
+                        "type": "linear",
+                        "direction": "vertical",
+                        "children": [
+                          {
+                            "type": "text",
+                            "content": "PROBE",
+                            "style": {
+                              "fontSize": 11,
+                              "color": "{{theme.color.onSurfaceVariant}}",
+                              "letterSpacing": 1.6
+                            }
+                          },
+                          {
+                            "type": "linear",
+                            "direction": "horizontal",
+                            "crossAxisAlignment": "end",
+                            "children": [
+                              {
+                                "type": "text",
+                                "content": "{{celsius}}",
+                                "style": {
+                                  "fontSize": 44,
+                                  "color": "{{theme.color.onSurface}}",
+                                  "fontWeight": "bold",
+                                  "fontFamily": "JetBrainsMono"
+                                }
+                              },
+                              {
+                                "type": "container",
+                                "padding": {
+                                  "left": 8,
+                                  "right": 0,
+                                  "top": 0,
+                                  "bottom": 0
+                                },
+                                "child": {
+                                  "type": "text",
+                                  "content": "C",
+                                  "style": {
+                                    "fontSize": 14,
+                                    "color": "{{theme.color.onSurfaceVariant}}"
+                                  }
+                                }
+                              }
+                            ],
+                            "mainAxisAlignment": "end"
+                          }
+                        ],
+                        "gap": 6
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 0,
+            "bottom": 8
+          },
+          "child": {
+            "type": "container",
+            "padding": {
+              "all": 18
+            },
+            "decoration": {
+              "color": "{{theme.color.surface}}",
+              "borderRadius": 14,
+              "border": {
+                "color": "{{theme.color.outline}}",
+                "width": 1
+              }
+            },
+            "child": {
+              "type": "linear",
+              "direction": "horizontal",
+              "crossAxisAlignment": "center",
+              "children": [
+                {
+                  "type": "linear",
+                  "direction": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "POWER",
+                      "style": {
+                        "fontSize": 11,
+                        "color": "{{theme.color.onSurfaceVariant}}",
+                        "letterSpacing": 1.6
+                      }
+                    },
+                    {
+                      "type": "linear",
+                      "direction": "horizontal",
+                      "crossAxisAlignment": "end",
+                      "children": [
+                        {
+                          "type": "text",
+                          "content": "{{watts}}",
+                          "style": {
+                            "fontSize": 26,
+                            "color": "{{theme.color.primary}}",
+                            "fontFamily": "JetBrainsMono"
+                          }
+                        },
+                        {
+                          "type": "container",
+                          "padding": {
+                            "left": 6,
+                            "right": 0,
+                            "top": 0,
+                            "bottom": 0
+                          },
+                          "child": {
+                            "type": "text",
+                            "content": "W",
+                            "style": {
+                              "fontSize": 13,
+                              "color": "{{theme.color.onSurfaceVariant}}"
+                            }
+                          }
+                        }
+                      ],
+                      "mainAxisAlignment": "end"
+                    }
+                  ],
+                  "gap": 6
+                },
+                {
+                  "type": "spacer"
+                },
+                {
+                  "type": "linear",
+                  "direction": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "COMPUTED HERE, NOT MEASURED",
+                      "style": {
+                        "fontSize": 11,
+                        "color": "{{theme.color.onSurfaceVariant}}",
+                        "letterSpacing": 1.4
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "content": "volts x amps · neither instrument reports it",
+                      "style": {
+                        "fontSize": 13,
+                        "color": "{{theme.color.onSurfaceVariant}}"
+                      }
+                    }
+                  ],
+                  "gap": 4,
+                  "crossAxisAlignment": "end"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 0,
+            "bottom": 8
+          },
+          "child": {
+            "type": "container",
+            "padding": {
+              "all": 18
+            },
+            "decoration": {
+              "color": "{{theme.color.surface}}",
+              "borderRadius": 14,
+              "border": {
+                "color": "{{theme.color.outline}}",
+                "width": 1
+              }
+            },
+            "child": {
+              "type": "linear",
+              "direction": "vertical",
+              "children": [
+                {
+                  "type": "linear",
+                  "direction": "horizontal",
+                  "crossAxisAlignment": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "content": "WHAT WENT DOWN THE WIRE",
+                      "style": {
+                        "fontSize": 11,
+                        "color": "{{theme.color.onSurfaceVariant}}",
+                        "letterSpacing": 1.6
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "linear",
+                  "direction": "horizontal",
+                  "crossAxisAlignment": "center",
+                  "children": [
+                    {
+                      "type": "expanded",
+                      "child": {
+                        "type": "text",
+                        "content": "{{raw}}",
+                        "style": {
+                          "fontSize": 12,
+                          "color": "{{theme.color.onSurfaceVariant}}",
+                          "fontFamily": "JetBrainsMono"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "gap": 8
+            }
+          }
+        },
+        {
+          "type": "expanded",
+          "child": {
+            "type": "box"
+          }
+        },
+        {
+          "type": "container",
+          "padding": {
+            "left": 22,
+            "right": 22,
+            "top": 4,
+            "bottom": 18
+          },
+          "child": {
+            "type": "linear",
+            "direction": "horizontal",
+            "crossAxisAlignment": "center",
+            "children": [
+              {
+                "type": "expanded",
+                "child": {
+                  "type": "text",
+                  "content": "{{benchRule}}",
+                  "style": {
+                    "fontSize": 13,
+                    "color": "{{theme.color.onSurfaceVariant}}"
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "content": "{{notice}}",
+                "style": {
+                  "fontSize": 13,
+                  "color": "{{theme.color.primary}}"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

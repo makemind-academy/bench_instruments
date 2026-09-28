@@ -1,0 +1,14 @@
+name: bench_server
+description: Three SCPI instruments from three vendors, wrapped as named tools.
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  mcp_server: ^2.1.1
+  async: ^2.11.0
+
+dev_dependencies:
+  lints: ^3.0.0
